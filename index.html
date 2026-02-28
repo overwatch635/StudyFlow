@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyFlow - Planificateur d'etude intelligent</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f6feb'/%3E%3Cpath d='M14 22c0-4 3-7 7-7h24c3 0 5 2 5 5v25c0 2-2 4-4 4H21c-4 0-7-3-7-7V22zm7-3a3 3 0 000 6h23v-5a1 1 0 00-1-1H21z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="splash" class="splash">
+    <div class="loader"></div>
+    <p>StudyFlow</p>
+  </div>
+
+  <header class="hero">
+    <div>
+      <h1>StudyFlow</h1>
+      <p>Planificateur d'etude intelligent pour optimiser tes revisions.</p>
+    </div>
+    <button id="themeToggle" class="btn btn-ghost" aria-label="Changer de theme">Mode sombre</button>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Ajouter une matiere</h2>
+      <form id="subjectForm" class="form">
+        <label>
+          Nom de la matiere
+          <input type="text" id="subjectName" placeholder="Ex: Mathematiques" required />
+        </label>
+
+        <label>
+          Date d'examen
+          <input type="date" id="examDate" required />
+        </label>
+
+        <label>
+          Difficulte
+          <select id="difficulty" required>
+            <option value="Facile">Facile</option>
+            <option value="Moyen">Moyen</option>
+            <option value="Difficile">Difficile</option>
+          </select>
+        </label>
+
+        <button type="submit" class="btn">Ajouter au planning</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Progression globale</h2>
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="globalStatus">Aucune matiere</span>
+          <span id="globalPercent">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div id="globalProgress" class="progress-fill"></div>
+        </div>
+      </div>
+      <canvas id="hoursChart" width="600" height="280" aria-label="Graphique des heures restantes"></canvas>
+    </section>
+
+    <section class="card full">
+      <h2>Planning de revision</h2>
+      <div id="notificationArea" class="notifications" aria-live="polite"></div>
+      <div id="planningList" class="planning-list"></div>
+    </section>
+  </main>
+
+  <template id="subjectTemplate">
+    <article class="subject-item">
+      <div class="subject-top">
+        <h3 class="subject-title"></h3>
+        <span class="badge difficulty"></span>
+      </div>
+      <p class="subject-info"></p>
+      <p class="subject-hours"></p>
+      <div class="subject-progress">
+        <div class="subject-progress-bar"><div class="subject-progress-fill"></div></div>
+        <span class="subject-status"></span>
+      </div>
+      <button class="btn btn-danger delete-btn" type="button">Supprimer</button>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
